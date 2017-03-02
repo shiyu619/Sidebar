@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <style lang="">
+        dl{
+            padding: 0;
+            margin: 0;
+        }
         li {
             list-style: none;
             line-height: 50px;
@@ -18,13 +22,17 @@
         li:hover{
             background-color: #b1b1b1;
         }
+        
+        li:hover .submuen{
+            background-color: #c3c3c3;
+        }
         #youbiao {
             width: 10px;
             height: 0;
             opacity: 0;
             position: absolute;
             background-color: red;
-            transition: all .3s;
+            transition: all .2s;
         }
     </style>
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
@@ -63,7 +71,21 @@
     </ul>
     <script>
         $('ul').on('click', function(e) {
+            if(e.target.tagName === "UL") return;
+            $(e.target).css('borderTop',"1px solid #red")
             $(e.target).find('.submuen').slideToggle();
+            $(e.target).siblings().find('.submuen').slideUp();
+            // console.log($(e.target).position().top)
+            // $('#youbiao').css('top', $(e.target).position().top+'px')
+            if(e.target.tagName !== 'DD') return;
+            $('ul').find('.submuen').each(function(i,v) {
+                $(v).children().css('backgroundColor', '#c3c3c3')
+            })
+           
+            $(e.target).css('backgroundColor', 'blue').siblings().css('backgroundColor', '#c3c3c3');
+
+            
+
         })
         $("ul").on('mouseover', function(e) {
             if (e.target.tagName === "UL") return;
@@ -87,6 +109,11 @@
                 'opacity': '0',
             })
         })
+        // $('ul').find('li').each(function(i,v) {
+        //     $(v).on('mouseout', function() {
+        //         $(this).find('.submuen').css('backgroundColor','#c3c3c3')
+        //     })
+        // })
     </script>
 </body>
 </html>
