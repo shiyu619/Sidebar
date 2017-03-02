@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style lang="">
+        li {
+            list-style: none;
+            line-height: 50px;
+        }
+        ul {
+            background-color: #c3c3c3;
+            position: relative;
+        }
+        dl {
+            display: none;
+        }
+        li:hover{
+            background-color: #b1b1b1;
+        }
+        #youbiao {
+            width: 10px;
+            height: 0;
+            opacity: 0;
+            position: absolute;
+            background-color: red;
+            transition: all .3s;
+        }
+    </style>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+</head>
+<body>
+    <ul>
+        <li class="list">壹
+            <dl class="submuen">
+                <dd>111</dd>
+                <dd>1111</dd>
+                <dd>11111</dd>
+            </dl>
+        </li>
+        <li class="list">贰
+            <dl class="submuen">
+                <dd>222</dd>
+                <dd>2222</dd>
+                <dd>22222</dd>
+            </dl>
+        </li>
+        <li class="list">叁
+            <dl class="submuen">
+                <dd>333</dd>
+                <dd>3333</dd>
+                <dd>33333</dd>
+            </dl>
+        </li>
+        <li class="list">肆
+            <dl class="submuen">
+                <dd>444</dd>
+                <dd>4444</dd>
+                <dd>44444</dd>
+            </dl>
+        </li>
+        <span id="youbiao"></span>
+    </ul>
+    <script>
+        $('ul').on('click', function(e) {
+            $(e.target).find('.submuen').slideToggle();
+        })
+        $("ul").on('mouseover', function(e) {
+            if (e.target.tagName === "UL") return;
+            var li = null;
+            if(e.target.tagName === "LI") {
+                li = $(e.target);
+            } else {
+                li = $(e.target).parent().parent();
+            }
+            console.log(e.target,li);
+            var top = li.position().top;
+            $('#youbiao').css({
+                'height': '50px',
+                'opacity': '1',
+                'top': top
+            })
+        })
+        $('ul').on('mouseleave', function() {
+            $('#youbiao').css({
+                'height': '0',
+                'opacity': '0',
+            })
+        })
+    </script>
+</body>
+</html>
